@@ -1,0 +1,26 @@
+#highscore {
+    font-size: larger;
+    font-weight: 400;
+    text-decoration: solid;
+}
+
+#timer {
+    position: relative;
+    float: right;
+}
+
+#questions {
+    border: solid 4px;
+    border-radius: 8px;
+    position: relative;
+    top: 40vh;
+}
+
+#questions h1 {
+    text-align: center;
+}
+
+main #startQuiz {
+   width: fit-content;
+   margin-left: 45vw;
+}
