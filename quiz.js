@@ -2,7 +2,7 @@
 var startQuiz = document.getElementById("startQuiz");
 var timeElement = document.getElementById("timer");
 var secondsLeft = 75;
-var question1
+var score = 0;
 
 //Timer Function
 function startTimer (){
@@ -26,8 +26,7 @@ function sendMessage () {
 }
 
 //Quiz Function
-//Question 1
-//what is not a primitive data type
+//Question variable
 var questions = [{
     question: "Which is these is not a primative data type",
     userChoice: ["booleans", "undefined", "variables", "number"],
@@ -53,6 +52,8 @@ var questions = [{
     userChoice: ["Primitive data types", "arrays", "methods", "all of the above"],
     answer: "all of the above"
 }]
+
+var mainQuestions = document.querySelector("#questions")
 
 
 //click event listener
