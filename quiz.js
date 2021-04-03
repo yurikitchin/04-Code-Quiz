@@ -3,6 +3,7 @@ var startQuiz = document.getElementById("startQuiz");
 var timeElement = document.getElementById("timer");
 var secondsLeft = 75;
 var score = 0;
+var questionIndex = 0;
 
 //Timer Function
 function startTimer (){
@@ -53,12 +54,21 @@ var questions = [{
     answer: "all of the above"
 }]
 
-var mainQuestions = document.querySelector("#questions")
+var mainQuestions = document.querySelector("#questions");
+var multipleChoice = document.querySelector("#multipleChoice")
 
 //function to render questions to the page
 function renderQuestions() {
     //clear the data in the questions section
+    mainQuestions.innerHTML ="";
+    multipleChoice = "";
     //loop through info in question array 
+    for (var i = 0; i < questions.length; i++){
+        //appends question to the title
+        var userQuestion = questions[questionIndex].question
+        var userChoices = questions[questionIndex].userChoice
+        mainQuestions.textContent = userQuestion;
+    }
     //apend each question to the multiplechoice list
     //when answer selected by user, compared to answer in array true or false
 
