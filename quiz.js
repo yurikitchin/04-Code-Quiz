@@ -55,6 +55,16 @@ var questions = [{
 
 var mainQuestions = document.querySelector("#questions")
 
+//function to render questions to the page
+function renderQuestions() {
+    //clear the data in the questions section
+    //loop through info in question array 
+    //apend each question to the multiplechoice list
+    //when answer selected by user, compared to answer in array true or false
+
+}
+
+
 
 //click event listener
 startQuiz.addEventListener('click', startTimer)
