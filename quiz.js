@@ -56,16 +56,13 @@ var questions = [{
 }]
 
 var mainQuestions = document.querySelector("#questions");
-var multipleChoice = document.createElement("ul")
-// var multipleChoice = document.querySelector("#multipleChoice")
 var createList = document.createElement("ul")
 
 //function to render questions to the page
 function renderQuestions(questionIndex) {
-    debugger
     //clear the data in the questions section
     mainQuestions.innerHTML ="";
-    multipleChoice.innerHTML = "";
+    createList.innerHTML = "";
     //loop through info in question array 
     for (var i = 0; i < questions.length; i++){
         //appends question to the title
@@ -108,15 +105,24 @@ function compareFunction(event) {
     //must add 1 to question index, to render the next question untill index is greater than or equal to the questions array
     questionIndex++;
     if (questionIndex >= questions.length){
-        //run function to how answers, score and enter details
-        quizCompleteFunction();
-        createAnswerSection.textContent = "You have completed the quiz!" + "You scored " + score + "/5"
+        //run function to show answers, score and enter details
+        alert("You have completed the quiz!" + "You scored " + score + "/5")
+        quizCompleteFunction();        
     } else {
-        multipleChoice.innerHTML = "";
         renderQuestions(questionIndex)
     }
     mainQuestions.appendChild(createAnswerSection)
 }
+//create quiz complete function
+//must log score to the local storage, along with name and add it to the highscores page
+//add restart botton
+function quizCompleteFunction (){
+    //clear text and stop timer
 
+    //create a label to tell user to enter name for highscore
+    //creat input for names
+    //store name to local storage
+    //restart button
 
+}
 
