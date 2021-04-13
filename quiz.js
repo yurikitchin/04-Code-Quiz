@@ -111,18 +111,63 @@ function compareFunction(event) {
     } else {
         renderQuestions(questionIndex)
     }
-    mainQuestions.appendChild(createAnswerSection)
 }
 //create quiz complete function
 //must log score to the local storage, along with name and add it to the highscores page
 //add restart botton
 function quizCompleteFunction (){
+    debugger
     //clear text and stop timer
-
+    mainQuestions.innerHTML = "";
+    timeElement.innerHTML = "";
     //create a label to tell user to enter name for highscore
+    var highscoreLabel = document.createElement("label");
+    highscoreLabel.setAttribute("id", "highscoreLabel");
+    highscoreLabel.textContent = "Enter your name:";
+    mainQuestions.appendChild(highscoreLabel);
+
     //creat input for names
-    //store name to local storage
+    var highscoreInput = document.createElement("input");
+    highscoreInput.setAttribute("type", "text");
+    highscoreInput.setAttribute("id", "enterName");
+    highscoreInput.textContent = "";
+    mainQuestions.appendChild(highscoreInput);
+
+    //create submit button
+    var highscoreSubmit = document.createElement("button");
+    highscoreSubmit.setAttribute("type", "submit");
+    highscoreSubmit.setAttribute("id", "submitScore");
+    highscoreSubmit.textContent = "Submit Score";
+    mainQuestions.appendChild(highscoreSubmit)
+
+    //store name to local storage, event listener
+    highscoreSubmit.addEventListener("click", submitScoreFunction)
+
+
+function submitScoreFunction (){
+        var name = highscoreInput.value;
+        
+        if (name === null){
+            alert("You must enter your name");
+        } else {
+            var highScoreData = [{
+                name: name,
+                score: score
+            }]
+            console.log(highScoreData)
+            }
+            //save highScoreData to local storage, to be displayed on highscores page
+            //creat new array that high score data gets added to the converted to string and saved to local storage
+            var scoreList = localStorage.getItem("scoreList");
+            debugger
+            if (scoreList === null) {
+                scoreList = [];
+            } else {
+                scoreList = JSON.parse(scoreList);
+            }
+            scoreList.push(highScoreData);
+            var newEntry = JSON.stringify(scoreList)
+            localStorage.setItem("scoreList", newEntry)
+            }}
+        
     //restart button
-
-}
-
