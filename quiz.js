@@ -144,6 +144,7 @@ function quizCompleteFunction (){
 
 
 function submitScoreFunction (){
+    debugger
         var name = highscoreInput.value;
         
         if (name === null){
@@ -160,7 +161,7 @@ function submitScoreFunction (){
             //creat new array that high score data gets added to the converted to string and saved to local storage
             var scoreList = localStorage.getItem("scoreList");
             if (scoreList === null) {
-                scoreList = {};
+                scoreList = [];
             } else {
                 scoreList = JSON.parse(scoreList);
                 // console.log("scoreList")
@@ -174,10 +175,15 @@ function submitScoreFunction (){
      //View highscires, add event listener to viewhighscores link
      var highscoreBtn = document.querySelector("#highscore")
      var highscoreList = ""
-     var restartBtn = document.createElement("button");
     
      highscoreBtn.addEventListener('click', viewHighscoresFunction)
-    
+     function restartBtn(){
+        var restartBtn = document.createElement("button");
+        restartBtn.setAttribute("type", "submit")
+        restartBtn.setAttribute("id", "restartBtn");
+        restartBtn.innerText = "Restart Quiz!"
+        mainQuestions.appendChild(restartBtn)
+     }
 
      //populate questions box with title and new list
      function viewHighscoresFunction (){
@@ -192,31 +198,41 @@ function submitScoreFunction (){
              highscorePrompt.setAttribute('id', 'noScores');
              highscorePrompt.textContent = "No scores submitted, Complete the quiz to enter your name!";
              mainQuestions.appendChild(highscorePrompt);
+             restartBtn
              
              
-             restartBtn.setAttribute("type", "submit")
-             restartBtn.setAttribute("id", "restartBtn");
-             restartBtn.innerText = "Restart Quiz!"
-             questionIndex = 0
-             mainQuestions.appendChild(restartBtn)
-             restartBtn.addEventListener('click', renderQuestions)
+            //  restartBtn.setAttribute("type", "submit")
+            //  restartBtn.setAttribute("id", "restartBtn");
+            //  restartBtn.innerText = "Restart Quiz!"
+            //  questionIndex = 0
+            //  mainQuestions.appendChild(restartBtn)
+            //  restartBtn.addEventListener('click', renderQuestions)
          } else {
              debugger
+             var highscoreTitle = document.createElement("h1")
+             highscoreTitle.setAttribute("id", "highscoreTitle")
+             highscoreTitle.textContent = "High Scores"
+             mainQuestions.appendChild(highscoreTitle)
+
              highscoreList = JSON.parse(highscoreList);
+             highscoreArrayStopLength = Math.min(4, highscoreList.length)
+             console.log(highscoreArrayStopLength)
+
             //  console.log(highscoreList)
             //  console.log(highscoreList[0])
              //for loop top 5 high scores
-             for (let index = 0; index <= 4; index++) {
+             for (let index = 0; index <= highscoreArrayStopLength; index++) {
                  console.log(highscoreList[index].name);
                  var createHighscore = document.createElement("li")
                  createHighscore.setAttribute("id", "highscoreList")
-                 createHighscore.textContent = highscoreList[index].name + highscoreList.score
+                 createHighscore.textContent = "Legend = " + highscoreList[index].name +" Score ="+ highscoreList[index].score
                  mainQuestions.appendChild(createHighscore)
-             }
-            
-             
+                 restartBtn
+
+             }     
           
              }
+
          }
 
      //}
