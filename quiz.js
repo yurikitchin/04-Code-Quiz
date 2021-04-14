@@ -170,6 +170,7 @@ function submitScoreFunction (){
             scoreList.push(highScoreData);
             var newEntry = JSON.stringify(scoreList)
             localStorage.setItem("scoreList", newEntry)
+            restartBtn()
             }}
 
      //View highscires, add event listener to viewhighscores link
