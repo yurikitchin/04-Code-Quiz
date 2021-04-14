@@ -159,7 +159,6 @@ function submitScoreFunction (){
             //save highScoreData to local storage, to be displayed on highscores page
             //creat new array that high score data gets added to the converted to string and saved to local storage
             var scoreList = localStorage.getItem("scoreList");
-            debugger
             if (scoreList === null) {
                 scoreList = [];
             } else {
@@ -169,5 +168,27 @@ function submitScoreFunction (){
             var newEntry = JSON.stringify(scoreList)
             localStorage.setItem("scoreList", newEntry)
             }}
-        
-    //restart button
+
+     //View highscires, add event listener to viewhighscores link
+     var highscoreBtn = document.querySelector("#highscore")
+     var highscoreList = ""
+    
+     highscoreBtn.addEventListener('click', viewHighscoresFunction)
+
+     //populate questions box with title and new list
+     function viewHighscoresFunction (){
+         debugger
+         mainQuestions.innerHTML = ""
+         createList.innerHTML = ""
+         //highscoreList = localStorage.getItem(scoreList)
+         if (highscoreList === ""){
+             var highscorePrompt = document.createElement("h1");
+             highscorePrompt.setAttribute('id', 'noScores');
+             highscorePrompt.textContent = "No scores submitted, Complete the quiz to enter your name!";
+             mainQuestions.appendChild(highscorePrompt)
+
+         }
+
+     }
+     //fill list with information saved in local storage   
+    //create restart button
