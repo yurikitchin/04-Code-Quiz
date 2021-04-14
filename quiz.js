@@ -116,7 +116,6 @@ function compareFunction(event) {
 //must log score to the local storage, along with name and add it to the highscores page
 //add restart botton
 function quizCompleteFunction (){
-    debugger
     //clear text and stop timer
     mainQuestions.innerHTML = "";
     timeElement.innerHTML = "";
@@ -150,19 +149,22 @@ function submitScoreFunction (){
         if (name === null){
             alert("You must enter your name");
         } else {
-            var highScoreData = [{
+            var highScoreData = {
                 name: name,
                 score: score
-            }]
-            console.log(highScoreData)
+            }
+
+            // console.log(highScoreData)
             }
             //save highScoreData to local storage, to be displayed on highscores page
             //creat new array that high score data gets added to the converted to string and saved to local storage
             var scoreList = localStorage.getItem("scoreList");
             if (scoreList === null) {
-                scoreList = [];
+                scoreList = {};
             } else {
                 scoreList = JSON.parse(scoreList);
+                // console.log("scoreList")
+                // console.log(scoreList)
             }
             scoreList.push(highScoreData);
             var newEntry = JSON.stringify(scoreList)
@@ -172,23 +174,51 @@ function submitScoreFunction (){
      //View highscires, add event listener to viewhighscores link
      var highscoreBtn = document.querySelector("#highscore")
      var highscoreList = ""
+     var restartBtn = document.createElement("button");
     
      highscoreBtn.addEventListener('click', viewHighscoresFunction)
+    
 
      //populate questions box with title and new list
      function viewHighscoresFunction (){
-         debugger
          mainQuestions.innerHTML = ""
          createList.innerHTML = ""
          //highscoreList = localStorage.getItem(scoreList)
+         if (localStorage["scoreList"] === undefined){
+             highscoreList = "" 
+         } else {highscoreList = localStorage.getItem("scoreList")}
          if (highscoreList === ""){
              var highscorePrompt = document.createElement("h1");
              highscorePrompt.setAttribute('id', 'noScores');
              highscorePrompt.textContent = "No scores submitted, Complete the quiz to enter your name!";
-             mainQuestions.appendChild(highscorePrompt)
-
+             mainQuestions.appendChild(highscorePrompt);
+             
+             
+             restartBtn.setAttribute("type", "submit")
+             restartBtn.setAttribute("id", "restartBtn");
+             restartBtn.innerText = "Restart Quiz!"
+             questionIndex = 0
+             mainQuestions.appendChild(restartBtn)
+             restartBtn.addEventListener('click', renderQuestions)
+         } else {
+             debugger
+             highscoreList = JSON.parse(highscoreList);
+            //  console.log(highscoreList)
+            //  console.log(highscoreList[0])
+             //for loop top 5 high scores
+             for (let index = 0; index <= 4; index++) {
+                 console.log(highscoreList[index].name);
+                 var createHighscore = document.createElement("li")
+                 createHighscore.setAttribute("id", "highscoreList")
+                 createHighscore.textContent = highscoreList[index].name + highscoreList.score
+                 mainQuestions.appendChild(createHighscore)
+             }
+            
+             
+          
+             }
          }
 
-     }
+     //}
      //fill list with information saved in local storage   
     //create restart button
