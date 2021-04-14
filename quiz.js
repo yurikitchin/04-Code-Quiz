@@ -61,6 +61,7 @@ var createList = document.createElement("ul")
 //function to render questions to the page
 function renderQuestions(questionIndex) {
     //clear the data in the questions section
+    console.log(questions[questionIndex].question)
     mainQuestions.innerHTML ="";
     createList.innerHTML = "";
     //loop through info in question array 
@@ -144,7 +145,6 @@ function quizCompleteFunction (){
 
 
 function submitScoreFunction (){
-    debugger
         var name = highscoreInput.value;
         
         if (name === null){
@@ -177,12 +177,20 @@ function submitScoreFunction (){
      var highscoreList = ""
     
      highscoreBtn.addEventListener('click', viewHighscoresFunction)
+
      function restartBtn(){
         var restartBtn = document.createElement("button");
         restartBtn.setAttribute("type", "submit")
         restartBtn.setAttribute("id", "restartBtn");
         restartBtn.innerText = "Restart Quiz!"
         mainQuestions.appendChild(restartBtn)
+        questionIndex = 0
+        questions = questions
+        restartBtn.addEventListener('click', reload)
+     }
+
+     function reload(){
+        window.location.reload()
      }
 
      //populate questions box with title and new list
@@ -198,17 +206,9 @@ function submitScoreFunction (){
              highscorePrompt.setAttribute('id', 'noScores');
              highscorePrompt.textContent = "No scores submitted, Complete the quiz to enter your name!";
              mainQuestions.appendChild(highscorePrompt);
-             restartBtn
+             restartBtn()
              
-             
-            //  restartBtn.setAttribute("type", "submit")
-            //  restartBtn.setAttribute("id", "restartBtn");
-            //  restartBtn.innerText = "Restart Quiz!"
-            //  questionIndex = 0
-            //  mainQuestions.appendChild(restartBtn)
-            //  restartBtn.addEventListener('click', renderQuestions)
          } else {
-             debugger
              var highscoreTitle = document.createElement("h1")
              highscoreTitle.setAttribute("id", "highscoreTitle")
              highscoreTitle.textContent = "High Scores"
@@ -222,15 +222,13 @@ function submitScoreFunction (){
             //  console.log(highscoreList[0])
              //for loop top 5 high scores
              for (let index = 0; index <= highscoreArrayStopLength; index++) {
-                 console.log(highscoreList[index].name);
+                 if (index === highscoreArrayStopLength) {break;} else {
                  var createHighscore = document.createElement("li")
                  createHighscore.setAttribute("id", "highscoreList")
                  createHighscore.textContent = "Legend = " + highscoreList[index].name +" Score ="+ highscoreList[index].score
                  mainQuestions.appendChild(createHighscore)
-                 restartBtn
-
-             }     
-          
+                 }}restartBtn()     
+                 
              }
 
          }
